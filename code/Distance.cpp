@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 using namespace std;
 
@@ -20,23 +20,12 @@ double polarDistance(double r1, double theta1, double r2, double theta2) {
     return sqrt(pow(r1, 2) + pow(r2, 2) - 2 * r1 * r2 * cos(degreesToRadians(theta2 - theta1)));
 }
 
-void sphericalToCartesian(double r, double theta, double phi, double& x, double& y, double& z) {
-    x = r * sin(degreesToRadians(phi)) * cos(degreesToRadians(theta));
-    y = r * sin(degreesToRadians(phi)) * sin(degreesToRadians(theta));
-    z = r * cos(degreesToRadians(phi));
-}
-
 double sphericalDistance(double r1, double theta1, double phi1, double r2, double theta2, double phi2) {
-    double x1, y1, z1;
-    double x2, y2, z2;
-    sphericalToCartesian(r1, theta1, phi1, x1, y1, z1);
-    sphericalToCartesian(r2, theta2, phi2, x2, y2, z2);
-    return distance3D(x1, y1, z1, x2, y2, z2);
+    return sqrt(pow(r1, 2) + pow(r2, 2) - 2 * r1 * r2 * (sin(theta1) * sin(theta2) * cos(phi1 - phi2) + cos(theta1) * cos(theta2)));
 }
 
 double sphericalSurfaceDistance(double r, double theta1, double phi1, double theta2, double phi2) {
-    double deltaSigma = acos(sin(degreesToRadians(phi1)) * sin(degreesToRadians(phi2)) + cos(degreesToRadians(phi1)) * cos(degreesToRadians(phi2)) * cos(degreesToRadians(theta2 - theta1)));
-    return r * deltaSigma;
+    return r * (acos(sin(phi1) * sin(phi2) + cos(phi1) * cos(phi2) * cos(theta1 - theta2)));
 }
 
 int main() {
