@@ -1,11 +1,11 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 using namespace std;
 
 const double pi = 3.14159265358979323846;
 
 void cartesianToPolar(double x, double y, double& r, double& theta) {
-    r = sqrt(x * x + y * y); 
+    r = sqrt(pow(x, 2) + pow(y, 2));
     theta = atan2(y, x); 
 }
 
