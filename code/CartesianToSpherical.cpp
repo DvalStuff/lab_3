@@ -1,19 +1,19 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 using namespace std;
 
 const double pi = 3.14159265358979323846;
 
 void cartesianToSpherical(double x, double y, double z, double& r, double& theta, double& phi) {
-    r = sqrt(x * x + y * y + z * z);     
+    r = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
     theta = acos(z / r);                 
     phi = atan2(y, x);                    
 }
 
 void sphericalToCartesian(double r, double theta, double phi, double& x, double& y, double& z) {
-    x = r * sin(theta) * cos(phi);         
-    y = r * sin(theta) * sin(phi);         
-    z = r * cos(theta);                 
+    x = r * sin(phi) * cos(theta);         
+    y = r * sin(phi) * sin(theta);         
+    z = r * cos(phi);                 
 }
 
 int main() {
@@ -36,7 +36,7 @@ int main() {
 
     for (int i = 0; i < num_points; i++) {
         double x, y, z;
-        sphericalToCartesian(spherical_r[i], spherical_theta[i], spherical_phi[i], x, y, z);
+        sphericalToCartesian(spherical_r[i], spherical_phi[i], spherical_theta[i], x, y, z);
         cout << "Spherical coordinates (r = " << spherical_r[i] << ", theta = " << spherical_theta[i] << ", phi = " << spherical_phi[i] << ") in the Cartesian system: (" << x << ", " << y << ", " << z << ")" << endl;
     }
     return 0;
